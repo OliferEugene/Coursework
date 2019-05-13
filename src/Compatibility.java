@@ -5,18 +5,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Compatibility {
+    static List goodCompatibleSectors = new ArrayList();
+    static List normalCompatibleSectors = new ArrayList();
+    static List totalCompatibleSectors = new ArrayList();
+    static int goodCompatibleArea = 0;
+    static int normalCompatibleArea = 0;
+    static int totalCompatibleArea = 0;
+    static int uncompatibleArea = 0;
 
-   static public void checkCompatibility(String wishfulCulture, String[] lastYearPlantings, int[] sectorsArea) throws IOException {
+    static public void checkCompatibility(String wishfulCulture, String[] lastYearPlantings, int[] sectorsArea) throws IOException {
         String lineValue;
         String compatibility = " ";
-
-        List goodCompatibleSectors = new ArrayList();
-        List normalCompatibleSectors = new ArrayList();
-        List totalCompatibleSectors = new ArrayList();
-        int goodCompatibleArea = 0;
-        int normalCompatibleArea = 0;
-        int totalCompatibleArea = 0;
-        int uncompatibleArea = 0;
 
         for (int i = 0; i < lastYearPlantings.length; i++) {
             FileReader fr = new FileReader("src/Compatibilities/" + wishfulCulture + ".txt");
@@ -47,6 +46,9 @@ public class Compatibility {
                 }
             fr.close();
         }
+
+    }
+    static public void showCompatibilityInfo(String wishfulCulture){
         if (goodCompatibleSectors.size() != 0) {
             System.out.println(" ");
             System.out.println("Good compatible sectors for " + wishfulCulture + " planting is:");
@@ -93,5 +95,4 @@ public class Compatibility {
         System.out.println(" ");
         System.out.println("Not compatible area: " + uncompatibleArea);
     }
-
 }

@@ -13,6 +13,7 @@ public class Main {
         String[] lastYearPlantings = Main.getLastYearPlantings(sectorsAmount);
         String wishfulCulture = getWishfulCulture().trim();
         Compatibility.checkCompatibility(wishfulCulture, lastYearPlantings, sectorsArea);
+        Compatibility.showCompatibilityInfo(wishfulCulture);
     }
 
     private static int getSectorsAmount() {
