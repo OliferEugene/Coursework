@@ -1,8 +1,6 @@
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Compatibility {
     static List goodCompatibleSectors = new ArrayList();
@@ -14,40 +12,29 @@ public class Compatibility {
     static int uncompatibleArea = 0;
 
     static public void checkCompatibility(String wishfulCulture, String[] lastYearPlantings, int[] sectorsArea) throws IOException {
-        String lineValue;
-        String compatibility = " ";
-
+        String compatibility[] = FileReaderController.readCompatibility(wishfulCulture, lastYearPlantings);
         for (int i = 0; i < lastYearPlantings.length; i++) {
-            FileReader fr = new FileReader("src/Compatibilities/" + wishfulCulture + ".txt");
-            Scanner scan = new Scanner(fr);
-            while(scan.hasNextLine()) {
-                lineValue = scan.nextLine().trim();
-                if (lineValue.startsWith(lastYearPlantings[i])) {
-                    compatibility = scan.nextLine();
-                }
+            switch (compatibility[i]) {
+                case ("0"):
+                    uncompatibleArea += sectorsArea[i];
+                    break;
+                case ("1"):
+                    normalCompatibleSectors.add(i + 1);
+                    totalCompatibleSectors.add(i + 1);
+                    normalCompatibleArea += sectorsArea[i];
+                    totalCompatibleArea += sectorsArea[i];
+                    break;
+                case ("2"):
+                    goodCompatibleSectors.add(i + 1);
+                    totalCompatibleSectors.add(i + 1);
+                    goodCompatibleArea += sectorsArea[i];
+                    totalCompatibleArea += sectorsArea[i];
+                default:
+                    break;
             }
-                    switch (compatibility) {
-                        case ("0"):
-                            uncompatibleArea += sectorsArea[i];
-                            break;
-                        case ("1"):
-                            normalCompatibleSectors.add(i + 1);
-                            totalCompatibleSectors.add(i + 1);
-                            normalCompatibleArea += sectorsArea[i];
-                            totalCompatibleArea += sectorsArea[i];
-                            break;
-                        case ("2"):
-                            goodCompatibleSectors.add(i + 1);
-                            totalCompatibleSectors.add(i + 1);
-                            goodCompatibleArea += sectorsArea[i];
-                            totalCompatibleArea += sectorsArea[i];
-                        default:
-                            break;
-                }
-            fr.close();
+            }
         }
 
-    }
     static public void showCompatibilityInfo(String wishfulCulture){
         if (goodCompatibleSectors.size() != 0) {
             System.out.println(" ");

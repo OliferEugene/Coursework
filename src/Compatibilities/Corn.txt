@@ -26,9 +26,9 @@ Radish
 1
 Lettuce
 2
-Beet
-0
 Celery
+0
+Beet
 0
 Dill
 1

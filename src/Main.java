@@ -1,4 +1,3 @@
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -49,12 +48,7 @@ public class Main {
 
         System.out.println("What were your sectors planted with last year? Pick from those listed below:\n");
 
-        FileReader fr = new FileReader("src/CultureList.txt");
-        Scanner scan = new Scanner(fr);
-        while(scan.hasNextLine()){
-            System.out.println(scan.nextLine());
-        }
-        fr.close();
+        FileReaderController.readCultureList();
 
         System.out.println(" ");
         String[] lastYearPlantings = new String[sectorsAmount];
