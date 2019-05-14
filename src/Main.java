@@ -4,15 +4,26 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        int programIsOn = 1;
         System.out.println("====================Decision support system for planning crop rotation==================== \n" +
                            "===Follow the hints at the command line so that the system helps you plan crop rotation===");
         int sectorsAmount = Main.getSectorsAmount();
         int[] sectorsArea = Main.getSectorsArea(sectorsAmount);
         Main.getFieldArea(sectorsAmount, sectorsArea);
         String[] lastYearPlantings = Main.getLastYearPlantings(sectorsAmount);
-        String wishfulCulture = getWishfulCulture().trim();
-        Compatibility.checkCompatibility(wishfulCulture, lastYearPlantings, sectorsArea);
-        Compatibility.showCompatibilityInfo(wishfulCulture);
+        while(programIsOn == 1) {
+            String wishfulCulture = getWishfulCulture().trim();
+            Compatibility.checkCompatibility(wishfulCulture, lastYearPlantings, sectorsArea);
+            Compatibility.showCompatibilityInfo(wishfulCulture);
+
+            Scanner input = new Scanner(System.in);
+
+            System.out.println("Do you want to change wishful culture? (1 - yes/2 - no)");
+            programIsOn = input.nextInt();
+            if(programIsOn == 1){
+                Compatibility.resetVariables();
+            }
+        }
     }
 
     private static int getSectorsAmount() {

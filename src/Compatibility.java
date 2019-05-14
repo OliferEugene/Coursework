@@ -11,6 +11,16 @@ public class Compatibility {
     static int totalCompatibleArea = 0;
     static int uncompatibleArea = 0;
 
+    static public void resetVariables() {
+        goodCompatibleSectors.clear();
+        normalCompatibleSectors.clear();
+        totalCompatibleSectors.clear();
+        goodCompatibleArea = 0;
+        normalCompatibleArea = 0;
+        totalCompatibleArea = 0;
+        uncompatibleArea = 0;
+    }
+
     static public void checkCompatibility(String wishfulCulture, String[] lastYearPlantings, int[] sectorsArea) throws IOException {
         String compatibility[] = FileReaderController.readCompatibility(wishfulCulture, lastYearPlantings);
         for (int i = 0; i < lastYearPlantings.length; i++) {
